@@ -62,8 +62,8 @@ The repository will be structured with `pnpm` workspaces:
 ## Quickstart (Local Development)
 
 ### Prerequisites
-- Node.js >= 20.x
-- `pnpm` >= 9.x
+- Node.js >= 22.x LTS (Active LTS)
+- `pnpm` >= 9.0.0 < 10.0.0 (e.g. `pnpm@9.15.x`)
 
 ### Setup & Run
 ```bash

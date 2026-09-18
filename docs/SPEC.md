@@ -6,7 +6,18 @@ This document details domain models, API contracts, Web UI requirements, and iCa
 
 ## 1. Domain Models (`@bindicator/types`)
 
-### Bin Stream Type
+### Bin Stream Type & Configured Palette
+
+The five household waste streams and their specific physical bin colors:
+
+| Bin Stream ID | Bin Type Name | Bin Color | Hex Code | Badge Text | Description |
+|---|---|---|---|---|---|
+| `household_waste` | Household Waste | **Black** | `#18181B` | `#FFFFFF` | General non-recyclable domestic waste |
+| `food_waste` | Food Waste | **Orange** | `#EA580C` | `#FFFFFF` | Food waste caddy, vegetable peelings, leftovers |
+| `paper_recycling` | Paper Recycling | **Purple** | `#7C3AED` | `#FFFFFF` | Clean paper, cardboard, magazines, newspapers |
+| `mixed_recycling` | Mixed Recycling | **Grey** | `#4B5563` | `#FFFFFF` | Clean plastic bottles/tins/cans, foil, glass bottles/jars |
+| `garden_waste` | Garden Waste | **Green** | `#15803D` | `#FFFFFF` | Grass clippings, shrub trimmings (paid subscription) |
+
 ```typescript
 export type BinTypeId =
   | 'household_waste'
@@ -26,7 +37,8 @@ export interface BinType {
 
 export interface CollectionEvent {
   id: number;
-  date: string; // ISO 8601 YYYY-MM-DD
+  date: string; // ISO 8601 YYYY-MM-DD for database & JSON serialization
+  displayDateUK?: string; // Formatted UK date for UI display: DD/MM/YYYY (e.g. 24/03/2025)
   bins: BinType[];
   notes?: string;
   daysUntil?: number;
@@ -34,6 +46,10 @@ export interface CollectionEvent {
   isTomorrow?: boolean;
 }
 ```
+
+### Date Standards: Storage vs. Presentation
+- **Data Layer / API Transmission:** Strict ISO 8601 string (`YYYY-MM-DD`). Guarantees correct chronological indexing, SQL `ORDER BY date ASC` sorting, and standard `Date` parsing without ambiguous locale inversion.
+- **UI / Presentation Layer:** UK format (`DD/MM/YYYY` or long format like `Monday 24 March 2025`). All date displays rendered in the React UI, calendar titles, or notifications must follow UK conventions.
 
 ---
 
@@ -57,7 +73,7 @@ Returns the next collection event strictly relative to today's date (or today's 
       {
         "id": "mixed_recycling",
         "name": "Mixed Recycling",
-        "colorHex": "#2563EB",
+        "colorHex": "#4B5563",
         "badgeTextColor": "#FFFFFF",
         "description": "Clean plastics, tins, cans, foil, glass bottles and jars",
         "iconName": "recycle"
@@ -65,7 +81,7 @@ Returns the next collection event strictly relative to today's date (or today's 
       {
         "id": "food_waste",
         "name": "Food Waste",
-        "colorHex": "#15803D",
+        "colorHex": "#EA580C",
         "badgeTextColor": "#FFFFFF",
         "description": "Food scraps, peelings, tea bags in compostable bags",
         "iconName": "apple"

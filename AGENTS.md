@@ -32,14 +32,18 @@ It provides:
 
 ## 3. The 5 Bin Types (Domain Rules)
 
-All code and data models must strictly recognize these 5 bin streams:
-1. `household_waste`: General non-recyclable domestic waste (Black/Grey).
-2. `food_waste`: Food caddy collection (Green/Brown caddy).
-3. `paper_recycling`: Paper, newspapers, shredded paper, clean card (Blue box/wheelie).
-4. `mixed_recycling`: Clean plastic bottles/trays, tin cans, foil, glass jars/bottles.
-5. `garden_waste`: Organic garden cuttings, lawn trimmings (Brown/Green bin, paid annual service).
+All code and data models must strictly recognize these 5 bin streams with their designated colors:
+1. `household_waste`: General non-recyclable domestic waste (**Black** - `#18181B`).
+2. `food_waste`: Food waste caddy collection (**Orange** - `#EA580C`).
+3. `paper_recycling`: Paper, newspapers, shredded paper, clean card (**Purple** - `#7C3AED`).
+4. `mixed_recycling`: Clean plastic bottles/trays, tin cans, foil, glass jars/bottles (**Grey** - `#4B5563`).
+5. `garden_waste`: Organic garden cuttings, lawn trimmings (**Green** - `#15803D`, paid annual service).
 
 *Note:* Multiple bins can and frequently do share the same collection date (e.g., Household Waste + Food Waste on the same morning).
+
+### Date Handling Rules
+- **Storage & API Transmission:** Always ISO 8601 string format (`YYYY-MM-DD`). This ensures standard lexicographical sorting in SQLite and JS without parsing bugs.
+- **User Presentation & UI:** Always UK format (`DD/MM/YYYY` or `Tuesday 25 March 2025`). All dates displayed to users in the web dashboard, notifications, and calendar summaries must reflect UK conventions.
 
 ---
 

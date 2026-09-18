@@ -41,9 +41,9 @@ Bindicator is packaged as a single, lightweight Docker container:
 
 ```dockerfile
 # Stage 1: Build packages and applications
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@9.15.4 --activate
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.base.json ./
 COPY packages/ ./packages/
 COPY api/ ./api/
@@ -52,10 +52,10 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm -r build
 
 # Stage 2: Production runner
-FROM node:20-alpine AS runner
+FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@9.15.4 --activate
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY packages/types/package.json ./packages/types/package.json
 COPY api/package.json ./api/package.json

@@ -56,7 +56,7 @@ Stores metadata for each waste stream.
 | `id` | `TEXT PRIMARY KEY` | Enum key: `household_waste`, `food_waste`, `paper_recycling`, `mixed_recycling`, `garden_waste` |
 | `name` | `TEXT NOT NULL` | Display name (e.g. "Household Waste") |
 | `description` | `TEXT NOT NULL` | Guidance on what can be placed in this bin |
-| `color_hex` | `TEXT NOT NULL` | Primary color badge (e.g. `#1F2937`, `#10B981`, `#3B82F6`, `#F59E0B`) |
+| `color_hex` | `TEXT NOT NULL` | Primary color badge: Household (`#18181B`), Food (`#EA580C`), Paper (`#7C3AED`), Mixed (`#4B5563`), Garden (`#15803D`) |
 | `icon_name` | `TEXT NOT NULL` | Lucide icon identifier |
 
 #### `collections` Table

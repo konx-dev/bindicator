@@ -31,7 +31,11 @@ data/
 
 ## 3. Normalized Schedule Schema (`schedule.json`)
 
-The target output format of the ingestion script is a clean, human-verifiable JSON file:
+The target output format of the ingestion script is a clean, human-verifiable JSON file.
+
+> **Note on Date Formats:**
+> - In `schedule.json` and SQLite storage, collection dates strictly use the **ISO 8601** format (`YYYY-MM-DD`). This is required so database indexing, query sorting (`ORDER BY date ASC`), and JS string comparisons naturally sort chronologically without date-parsing overhead or day/month inversion bugs.
+> - When displayed to the user in the Web UI, API display helpers, or calendar reminders, dates are consistently formatted to **UK standard** (`DD/MM/YYYY` or `Monday 6 January 2025`).
 
 ```json
 {
