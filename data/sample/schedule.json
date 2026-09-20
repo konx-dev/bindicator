@@ -1,0 +1,27 @@
+{
+  "year": 2026,
+  "council": "Sample Council",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "collections": [
+    {
+      "date": "2026-01-05",
+      "binTypes": ["household_waste", "food_waste"],
+      "notes": "Sample post-New Year collection"
+    },
+    {
+      "date": "2026-01-12",
+      "binTypes": ["mixed_recycling", "paper_recycling", "food_waste", "garden_waste"],
+      "notes": null
+    },
+    {
+      "date": "2026-01-19",
+      "binTypes": ["household_waste", "food_waste"],
+      "notes": null
+    },
+    {
+      "date": "2026-01-26",
+      "binTypes": ["mixed_recycling", "paper_recycling", "food_waste", "garden_waste"],
+      "notes": null
+    }
+  ]
+}

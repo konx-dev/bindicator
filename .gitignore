@@ -1,0 +1,18 @@
+node_modules/
+dist/
+build/
+.turbo/
+*.db
+*.db-journal
+.env
+.env.local
+coverage/
+.DS_Store
+*.tsbuildinfo
+
+# Ignore heavy raw scanned calendar images/PDFs across year folders
+data/**/raw/*
+!data/**/raw/.gitkeep
+!data/sample/raw/*
+
+
