@@ -16,16 +16,26 @@ Scraping council web portals is fragile because layouts change frequently. Howev
 
 ## 2. Directory Layout for Annual Data
 
-Raw PDFs and normalized output are tracked in git under `data/<year>/`:
+Raw scanned assets and normalized output are organized under `data/<year>/`:
 
 ```text
 data/
-└── 2025/
-    ├── raw/
-    │   ├── core-waste-schedule.pdf       # Core collection PDF
-    │   └── garden-waste-schedule.pdf     # Paid garden waste PDF
-    └── schedule.json                     # Normalized, merged schedule
+├── sample/                         # Committed to git: lightweight test fixture
+│   ├── raw/
+│   │   └── README.md
+│   └── schedule.json               # Sample schedule fixture for CI and testing
+├── 2026/
+│   ├── raw/                        # Local only (.gitignored, holds high-res scans)
+│   │   ├── core-waste-schedule.png
+│   │   └── garden-waste-schedule.png
+│   └── schedule.json               # Committed to git: auditable JSON (~10 KB)
 ```
+
+### Git Storage Policy: Option C (Local Raw Assets Ignored)
+- High-resolution council image scans (~7 MB each) are `.gitignore`d under `data/**/raw/*`.
+- Only the normalized, human-auditable **`schedule.json`** is committed to git.
+- This keeps the repository featherweight (< 100 KB over a decade of use) while keeping raw images preserved locally for ingestion and re-runs.
+- A committed `data/sample/` fixture ensures any new clone or CI runner can immediately validate schemas without downloading personal council scans.
 
 ---
 
